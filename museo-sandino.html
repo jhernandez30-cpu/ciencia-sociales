@@ -7,10 +7,11 @@
   <title>Mural Interactivo Sandino | Museo Digital</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="museo-sandino/assets/img/optimized/file_00000000f3e871fdb42c41a5eed35c4b.jpg" fetchpriority="high">
   <link rel="stylesheet" href="museo-sandino/styles.css">
 </head>
-<body data-asset-base="museo-sandino/assets/img/">
+<body data-asset-base="museo-sandino/assets/img/optimized/" data-audio-src="museo-sandino/assets/audio/sandino-ambiente.mp3">
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
   <div class="ambient-stage" aria-hidden="true">
@@ -58,11 +59,20 @@
     <a href="#escena-08" class="timeline-dot" data-target="escena-08">
       <span>08</span><small>Ideal</small>
     </a>
+    <a href="#escena-09" class="timeline-dot" data-target="escena-09">
+      <span>09</span><small>Orgullo</small>
+    </a>
+    <a href="#escena-10" class="timeline-dot" data-target="escena-10">
+      <span>10</span><small>Recibimiento</small>
+    </a>
     <a href="#escena-11" class="timeline-dot" data-target="escena-11">
-      <span>09</span><small>Memoria</small>
+      <span>11</span><small>Memoria</small>
     </a>
     <a href="#galeria" class="timeline-dot" data-target="galeria">
-      <span>10</span><small>Sala</small>
+      <span>12</span><small>Sala</small>
+    </a>
+    <a href="#cierre" class="timeline-dot" data-target="cierre">
+      <span>13</span><small>Cierre</small>
     </a>
   </aside>
 
@@ -85,10 +95,10 @@
           data-title="131 aniversario del nacimiento"
           data-caption="Primera pieza visual del mural: homenaje de la comunidad educativa."
           data-body="La portada presenta a Sandino como simbolo de dignidad nacional, educacion y memoria historica. Abre el recorrido con la bandera de Nicaragua, la escuela y el Manifiesto de San Albino como claves de lectura."
-          data-image="museo-sandino/assets/img/file_00000000f3e871fdb42c41a5eed35c4b.png"
+          data-image="museo-sandino/assets/img/optimized/file_00000000f3e871fdb42c41a5eed35c4b.jpg"
           data-next="#escena-02"
           aria-label="Ampliar imagen de portada del mural">
-          <img src="museo-sandino/assets/img/file_00000000f3e871fdb42c41a5eed35c4b.png" alt="Portada del mural sobre Sandino y el aniversario de su nacimiento.">
+          <img src="museo-sandino/assets/img/optimized/file_00000000f3e871fdb42c41a5eed35c4b.jpg" width="1024" height="1280" alt="Portada del mural sobre Sandino y el aniversario de su nacimiento." decoding="async" fetchpriority="high">
           <span class="gold-edge"></span>
           <span class="image-sheen"></span>
         </button>
@@ -107,10 +117,10 @@
           data-title="El nacimiento de Sandino"
           data-caption="Niquinohomo, Masaya. 18 de mayo de 1895."
           data-body="La segunda pieza situa el origen de Augusto Nicolas Calderon Sandino en Niquinohomo. Su historia se presenta desde la vida campesina, la familia y las injusticias sociales que marcaron su pensamiento."
-          data-image="museo-sandino/assets/img/file_00000000f2c071f88a00413f01d02394.png"
+          data-image="museo-sandino/assets/img/optimized/file_00000000f2c071f88a00413f01d02394.jpg"
           data-next="#escena-03"
           aria-label="Ampliar imagen sobre el nacimiento de Sandino">
-          <img class="scene-image" src="museo-sandino/assets/img/file_00000000f2c071f88a00413f01d02394.png" alt="Mural del nacimiento de Sandino en Niquinohomo.">
+          <img class="scene-image" src="museo-sandino/assets/img/optimized/file_00000000f2c071f88a00413f01d02394.jpg" width="1280" height="1024" alt="Mural del nacimiento de Sandino en Niquinohomo." loading="lazy" decoding="async">
           <span class="gold-edge"></span>
           <span class="image-sheen"></span>
         </button>
@@ -136,10 +146,10 @@
           data-title="Rostro del General de Hombres Libres"
           data-caption="Retrato evocativo de Sandino como figura historica."
           data-body="El retrato concentra la mirada firme del lider popular. La pieza funciona como pausa de museo: invita a observar el rostro, el sombrero y la presencia simbolica que atraveso generaciones."
-          data-image="museo-sandino/assets/img/copilot_image_1778208742772.jpeg"
+          data-image="museo-sandino/assets/img/optimized/copilot_image_1778208742772.jpg"
           data-next="#escena-04"
           aria-label="Ampliar retrato de Sandino">
-          <img class="scene-image" src="museo-sandino/assets/img/copilot_image_1778208742772.jpeg" alt="Retrato de Sandino con sombrero y canana.">
+          <img class="scene-image" src="museo-sandino/assets/img/optimized/copilot_image_1778208742772.jpg" width="853" height="1280" alt="Retrato de Sandino con sombrero y canana." loading="lazy" decoding="async">
           <span class="gold-edge"></span>
           <span class="image-sheen"></span>
         </button>
@@ -159,15 +169,15 @@
     <section class="museum-scene scene-reverse scroll-target" id="escena-04" data-scene-label="Montanas">
       <div class="scene-media-wrap">
         <button
-          class="scene-media portrait scene-trigger"
+          class="scene-media portrait face-safe scene-trigger"
           type="button"
           data-title="Las montanas de la resistencia"
           data-caption="Las Segovias como escenario de organizacion popular."
           data-body="La imagen introduce el paisaje montanoso, la estrategia de resistencia y la construccion de un movimiento que se apoyo en campesinos, trabajadores y comunidades rurales."
-          data-image="museo-sandino/assets/img/copilot_image_1778208739825.jpeg"
+          data-image="museo-sandino/assets/img/optimized/copilot_image_1778208739825.jpg"
           data-next="#manifiesto"
           aria-label="Ampliar imagen de Sandino en la montana">
-          <img class="scene-image" src="museo-sandino/assets/img/copilot_image_1778208739825.jpeg" alt="Sandino con combatientes en un paisaje montanoso.">
+          <img class="scene-image" src="museo-sandino/assets/img/optimized/copilot_image_1778208739825.jpg" width="853" height="1280" alt="Sandino con combatientes en un paisaje montanoso." loading="lazy" decoding="async">
           <span class="gold-edge"></span>
           <span class="image-sheen"></span>
         </button>
@@ -192,10 +202,10 @@
           data-title="Manifiesto de San Albino"
           data-caption="Por la dignidad y la independencia de Nicaragua."
           data-body="El Manifiesto de San Albino representa la decision politica de no rendirse y de defender la soberania nacional. En el museo funciona como documento vivo: una voz escrita que convoca memoria, dignidad y compromiso ciudadano."
-          data-image="museo-sandino/assets/img/file_00000000d6e871f895cbcca43b134193.png"
+          data-image="museo-sandino/assets/img/optimized/file_00000000d6e871f895cbcca43b134193.jpg"
           data-next="#escena-06"
           aria-label="Ampliar escena del Manifiesto de San Albino">
-          <img class="scene-image" src="museo-sandino/assets/img/file_00000000d6e871f895cbcca43b134193.png" alt="Sandino sostiene el Manifiesto de San Albino frente al pueblo.">
+          <img class="scene-image" src="museo-sandino/assets/img/optimized/file_00000000d6e871f895cbcca43b134193.jpg" width="1280" height="1024" alt="Sandino sostiene el Manifiesto de San Albino frente al pueblo." loading="lazy" decoding="async">
           <span class="gold-edge"></span>
           <span class="image-sheen"></span>
         </button>
@@ -223,10 +233,10 @@
           data-title="Unidad y soberania"
           data-caption="Sandino en dialogo con America Latina."
           data-body="La escena representa la dimension latinoamericana de la soberania. Las banderas, el mapa y la mesa de acuerdos refuerzan la idea de unidad regional frente a proyectos de dominacion."
-          data-image="museo-sandino/assets/img/file_0000000048fc71f8a94f7053c8a98654.png"
+          data-image="museo-sandino/assets/img/optimized/file_0000000048fc71f8a94f7053c8a98654.jpg"
           data-next="#escena-07"
           aria-label="Ampliar escena de unidad y soberania">
-          <img class="scene-image" src="museo-sandino/assets/img/file_0000000048fc71f8a94f7053c8a98654.png" alt="Sandino en una mesa de unidad latinoamericana y soberania.">
+          <img class="scene-image" src="museo-sandino/assets/img/optimized/file_0000000048fc71f8a94f7053c8a98654.jpg" width="1280" height="1024" alt="Sandino en una mesa de unidad latinoamericana y soberania." loading="lazy" decoding="async">
           <span class="gold-edge"></span>
           <span class="image-sheen"></span>
         </button>
@@ -251,10 +261,10 @@
           data-title="Derechos del pueblo"
           data-caption="Tierra, libertad, unidad y justicia social."
           data-body="Esta pieza traduce el legado de Sandino a lenguaje educativo: derechos del pueblo, tierra, libertad, soberania y justicia social como contenidos para debatir en el aula."
-          data-image="museo-sandino/assets/img/image_1778208735474.jpeg"
+          data-image="museo-sandino/assets/img/optimized/image_1778208735474.jpg"
           data-next="#escena-08"
           aria-label="Ampliar imagen educativa sobre derechos del pueblo">
-          <img class="scene-image" src="museo-sandino/assets/img/image_1778208735474.jpeg" alt="Sandino dialoga con campesinos en una escena educativa sobre derechos.">
+          <img class="scene-image" src="museo-sandino/assets/img/optimized/image_1778208735474.jpg" width="853" height="1280" alt="Sandino dialoga con campesinos en una escena educativa sobre derechos." loading="lazy" decoding="async">
           <span class="gold-edge"></span>
           <span class="image-sheen"></span>
         </button>
@@ -279,10 +289,10 @@
           data-title="Alla va el General"
           data-caption="Un pueblo que camina con su ideal."
           data-body="La marcha visual presenta a Sandino como figura que se mueve con el pueblo. La musica, las palomas y las banderas convierten la escena en memoria colectiva."
-          data-image="museo-sandino/assets/img/image_1778208724368.jpeg"
+          data-image="museo-sandino/assets/img/optimized/image_1778208724368.jpg"
           data-next="#escena-09"
           aria-label="Ampliar imagen del General con su pueblo">
-          <img class="scene-image" src="museo-sandino/assets/img/image_1778208724368.jpeg" alt="Sandino marcha con el pueblo y su ideal.">
+          <img class="scene-image" src="museo-sandino/assets/img/optimized/image_1778208724368.jpg" width="853" height="1280" alt="Sandino marcha con el pueblo y su ideal." loading="lazy" decoding="async">
           <span class="gold-edge"></span>
           <span class="image-sheen"></span>
         </button>
@@ -302,15 +312,15 @@
     <section class="museum-scene scene-reverse scroll-target" id="escena-09" data-scene-label="Orgullo">
       <div class="scene-media-wrap">
         <button
-          class="scene-media portrait scene-trigger"
+          class="scene-media portrait face-safe scene-trigger"
           type="button"
           data-title="Orgullo de haber nacido en Nicaragua"
           data-caption="Identidad nacional y dignidad popular."
           data-body="La imagen funciona como cumbre emocional del mural: Sandino aparece rodeado de pueblo, banderas y paisaje nacional. La frase central une identidad, pertenencia y memoria."
-          data-image="museo-sandino/assets/img/file_0000000085e871f8b27bb124726bd4e3.png"
+          data-image="museo-sandino/assets/img/optimized/file_0000000085e871f8b27bb124726bd4e3.jpg"
           data-next="#escena-10"
           aria-label="Ampliar imagen sobre orgullo nicaraguense">
-          <img class="scene-image" src="museo-sandino/assets/img/file_0000000085e871f8b27bb124726bd4e3.png" alt="Sandino frente a banderas de Nicaragua y pueblo reunido.">
+          <img class="scene-image" src="museo-sandino/assets/img/optimized/file_0000000085e871f8b27bb124726bd4e3.jpg" width="1024" height="1280" alt="Sandino frente a banderas de Nicaragua y pueblo reunido." loading="lazy" decoding="async">
           <span class="gold-edge"></span>
           <span class="image-sheen"></span>
         </button>
@@ -335,10 +345,10 @@
           data-title="Bienvenido, General"
           data-caption="Celebracion popular y memoria viva."
           data-body="La escena muestra al pueblo recibiendo al General. La alegria de las banderas y los carteles recuerda que la historia tambien se construye con reconocimiento popular."
-          data-image="museo-sandino/assets/img/copilot_image_1778208966106.jpeg"
+          data-image="museo-sandino/assets/img/optimized/copilot_image_1778208966106.jpg"
           data-next="#escena-11"
           aria-label="Ampliar imagen de bienvenida a Sandino">
-          <img class="scene-image" src="museo-sandino/assets/img/copilot_image_1778208966106.jpeg" alt="Pueblo recibe a Sandino con banderas y carteles.">
+          <img class="scene-image" src="museo-sandino/assets/img/optimized/copilot_image_1778208966106.jpg" width="853" height="1280" alt="Pueblo recibe a Sandino con banderas y carteles." loading="lazy" decoding="async">
           <span class="gold-edge"></span>
           <span class="image-sheen"></span>
         </button>
@@ -363,10 +373,10 @@
           data-title="Memoria de 1934"
           data-caption="Una escena sobria sobre la muerte de Sandino."
           data-body="La pieza final de la narrativa historica recuerda el asesinato de Sandino en 1934. El tratamiento del museo es sobrio: no busca el impacto facil, sino abrir una reflexion sobre memoria, poder y justicia historica."
-          data-image="museo-sandino/assets/img/image_1778209158247.jpeg"
+          data-image="museo-sandino/assets/img/optimized/image_1778209158247.jpg"
           data-next="#galeria"
           aria-label="Ampliar escena sobria sobre la muerte de Sandino">
-          <img class="scene-image" src="museo-sandino/assets/img/image_1778209158247.jpeg" alt="Representacion sobria de la muerte de Sandino en 1934.">
+          <img class="scene-image" src="museo-sandino/assets/img/optimized/image_1778209158247.jpg" width="853" height="1280" alt="Representacion sobria de la muerte de Sandino en 1934." loading="lazy" decoding="async">
           <span class="gold-edge"></span>
           <span class="image-sheen"></span>
         </button>
@@ -398,10 +408,10 @@
             data-title="Estacion de accesorios"
             data-caption="Sala museografica con banderas, sombreros y mensajes de Sandino."
             data-body="La sala propone una experiencia de museo escolar: objetos, frases y escenografia permiten que el visitante se acerque al personaje desde la observacion."
-            data-image="museo-sandino/assets/img/IMG-20260507-WA0021.jpg.jpeg"
+            data-image="museo-sandino/assets/img/optimized/IMG-20260507-WA0021.jpg"
             data-next="#galeria"
             aria-label="Ampliar estacion de accesorios del museo">
-            <img src="museo-sandino/assets/img/IMG-20260507-WA0021.jpg.jpeg" alt="Sala museografica dedicada a Sandino.">
+            <img src="museo-sandino/assets/img/optimized/IMG-20260507-WA0021.jpg" width="1280" height="960" alt="Sala museografica dedicada a Sandino." loading="lazy" decoding="async">
             <span>Estacion de accesorios</span>
           </button>
 
@@ -411,10 +421,10 @@
             data-title="Sombreros y consignas"
             data-caption="Objetos visuales: patria, soberania, dignidad nacional."
             data-body="Los objetos ayudan a convertir ideas historicas en elementos tocables: sombrero, panuelo, carteles y marco fotografico hacen visible la memoria popular."
-            data-image="museo-sandino/assets/img/IMG-20260507-WA0024.jpg.jpeg"
+            data-image="museo-sandino/assets/img/optimized/IMG-20260507-WA0024.jpg"
             data-next="#cierre"
             aria-label="Ampliar objetos y consignas del museo">
-            <img src="museo-sandino/assets/img/IMG-20260507-WA0024.jpg.jpeg" alt="Sombreros, panuelo y carteles de Sandino.">
+            <img src="museo-sandino/assets/img/optimized/IMG-20260507-WA0024.jpg" width="1248" height="1248" alt="Sombreros, panuelo y carteles de Sandino." loading="lazy" decoding="async">
             <span>Objetos de memoria</span>
           </button>
 
@@ -424,10 +434,10 @@
             data-title="Yo no me vendo, ni me rindo"
             data-caption="Retrato grafico de Sandino sobre fondo historico."
             data-body="Esta pieza cierra el mural con una frase de firmeza moral. La textura de pergamino y montana recupera el tono de documento, archivo y legado."
-            data-image="museo-sandino/assets/img/IMG-20260507-WA0023.jpg.jpeg"
+            data-image="museo-sandino/assets/img/optimized/IMG-20260507-WA0023.jpg"
             data-next="#cierre"
             aria-label="Ampliar retrato grafico de Sandino">
-            <img src="museo-sandino/assets/img/IMG-20260507-WA0023.jpg.jpeg" alt="Retrato grafico de Sandino con frase de dignidad.">
+            <img src="museo-sandino/assets/img/optimized/IMG-20260507-WA0023.jpg" width="1280" height="720" alt="Retrato grafico de Sandino con frase de dignidad." loading="lazy" decoding="async">
             <span>Retrato y legado</span>
           </button>
         </div>
@@ -458,12 +468,16 @@
     </button>
   </div>
 
+  <button id="audioToggle" class="audio-toggle" type="button" aria-label="Activar o desactivar audio" aria-pressed="false">
+    🔇 Silencio
+  </button>
+
   <div class="mural-modal" id="mural-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-backdrop" data-modal-close></div>
     <article class="modal-panel" tabindex="-1">
       <button class="modal-close" type="button" data-modal-close aria-label="Cerrar modal">&times;</button>
       <div class="modal-media">
-        <img id="modal-image" src="" alt="">
+        <img id="modal-image" src="" alt="" decoding="async">
       </div>
       <div class="modal-copy">
         <p class="kicker" id="modal-caption"></p>
@@ -477,10 +491,7 @@
     </article>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-  <script src="museo-sandino/script.js"></script>
-  <script src="museo-sandino/animation.js"></script>
+  <script src="museo-sandino/script.js" defer></script>
 </body>
 </html>
 

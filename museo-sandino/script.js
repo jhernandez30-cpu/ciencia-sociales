@@ -1,6 +1,8 @@
 (() => {
   const doc = document.documentElement;
   const body = document.body;
+  doc.classList.add("js-ready");
+
   const progress = document.querySelector(".scroll-progress span");
   const particleField = document.getElementById("particle-field");
   const scrollTargets = Array.from(document.querySelectorAll(".scroll-target"));
@@ -16,8 +18,12 @@
   const modalCaption = document.getElementById("modal-caption");
   const modalBody = document.getElementById("modal-body");
   const modalExplore = document.getElementById("modal-explore");
+  const audioToggle = document.getElementById("audioToggle");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const assetBase = body.dataset.assetBase || "assets/img/";
+  const smallScreen = window.matchMedia("(max-width: 700px)").matches;
+  const reducedData = Boolean(navigator.connection?.saveData);
+  const assetBase = body.dataset.assetBase || "museo-sandino/assets/img/optimized/";
+  const audioSrc = body.dataset.audioSrc || "museo-sandino/assets/audio/sandino-ambiente.mp3";
 
   let activeIndex = 0;
   let modalNextTarget = "#escena-02";
@@ -28,17 +34,33 @@
   const setProgress = () => {
     if (!progress) return;
     const maxScroll = doc.scrollHeight - window.innerHeight;
-    const percent = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
-    progress.style.width = `${Math.min(100, Math.max(0, percent))}%`;
+    const ratio = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+    progress.style.transform = `scaleX(${Math.min(1, Math.max(0, ratio))})`;
   };
 
-  const scrollToTarget = (target) => {
+  let progressFrame = 0;
+
+  const requestProgressUpdate = () => {
+    if (progressFrame) return;
+    progressFrame = window.requestAnimationFrame(() => {
+      progressFrame = 0;
+      setProgress();
+    });
+  };
+
+  const scrollToTarget = (target, options = {}) => {
     const element = typeof target === "string" ? document.querySelector(target) : target;
     if (!element) return;
     element.scrollIntoView({
-      behavior: reducedMotion ? "auto" : "smooth",
+      behavior: options.instant || reducedMotion ? "auto" : "smooth",
       block: "start"
     });
+  };
+
+  const restoreHashPosition = () => {
+    if (!window.location.hash) return;
+    const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+    if (target) scrollToTarget(target, { instant: true });
   };
 
   const setActiveScene = (id) => {
@@ -55,8 +77,8 @@
   };
 
   const buildParticles = () => {
-    if (!particleField) return;
-    const count = window.innerWidth < 640 ? 32 : 76;
+    if (!particleField || reducedMotion || reducedData || smallScreen) return;
+    const count = window.innerWidth < 1024 ? 18 : 34;
     const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < count; i += 1) {
@@ -90,7 +112,7 @@
     title: "Manifiesto de San Albino",
     caption: "Documento vivo de dignidad nacional",
     body: "Desde San Albino, la palabra escrita se convierte en accion historica: defensa de la independencia, rechazo a la rendicion y compromiso con la soberania de Nicaragua. Esta seccion propone leer el manifiesto como fuente historica y como llamada a la responsabilidad ciudadana.",
-    image: `${assetBase}file_00000000d6e871f895cbcca43b134193.png`,
+    image: `${assetBase}file_00000000d6e871f895cbcca43b134193.jpg`,
     next: "#escena-06"
   });
 
@@ -193,7 +215,12 @@
   };
 
   const setupObserver = () => {
-    if (!("IntersectionObserver" in window)) return;
+    scrollTargets[0]?.classList.add("is-visible");
+
+    if (!("IntersectionObserver" in window)) {
+      scrollTargets.forEach((target) => target.classList.add("is-visible"));
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -205,32 +232,154 @@
       },
       {
         root: null,
-        threshold: 0.38,
-        rootMargin: "-18% 0px -42% 0px"
+        threshold: 0.22,
+        rootMargin: "-12% 0px -36% 0px"
       }
     );
 
     scrollTargets.forEach((target) => observer.observe(target));
   };
 
-  const setupImagePreload = () => {
-    const priorityImages = [
-      `${assetBase}file_00000000f3e871fdb42c41a5eed35c4b.png`,
-      `${assetBase}file_00000000f2c071f88a00413f01d02394.png`,
-      `${assetBase}file_00000000d6e871f895cbcca43b134193.png`
-    ];
+  const setupAudio = () => {
+    if (!audioToggle) return;
 
-    priorityImages.forEach((src) => {
-      const image = new Image();
-      image.src = src;
+    // Coloca el audio ambiental en museo-sandino/assets/audio/sandino-ambiente.mp3.
+    const bgAudio = new Audio(audioSrc);
+    const targetVolume = 0.35;
+    const fadeDuration = 900;
+
+    let fadeFrame = 0;
+    let isStarting = false;
+    let userPaused = false;
+    let wasPlayingBeforeHidden = false;
+
+    bgAudio.loop = true;
+    bgAudio.preload = "auto";
+    bgAudio.volume = targetVolume;
+
+    const isPlaying = () => !bgAudio.paused && !bgAudio.ended;
+
+    const setAudioButton = (playing) => {
+      audioToggle.textContent = playing ? "🔊 Audio" : "🔇 Silencio";
+      audioToggle.classList.toggle("is-muted", !playing);
+      audioToggle.setAttribute("aria-pressed", String(playing));
+      audioToggle.setAttribute(
+        "aria-label",
+        playing ? "Pausar audio ambiental" : "Activar audio ambiental"
+      );
+    };
+
+    const stopFade = () => {
+      if (!fadeFrame) return;
+      cancelAnimationFrame(fadeFrame);
+      fadeFrame = 0;
+    };
+
+    const fadeTo = (volume, onComplete) => {
+      stopFade();
+      const startVolume = bgAudio.volume;
+      const startedAt = performance.now();
+
+      const step = (now) => {
+        const progress = Math.min(1, (now - startedAt) / fadeDuration);
+        bgAudio.volume = startVolume + (volume - startVolume) * progress;
+
+        if (progress < 1) {
+          fadeFrame = requestAnimationFrame(step);
+          return;
+        }
+
+        fadeFrame = 0;
+        bgAudio.volume = volume;
+        onComplete?.();
+      };
+
+      fadeFrame = requestAnimationFrame(step);
+    };
+
+    const playAudio = async () => {
+      if (isPlaying() || isStarting) return true;
+      if (document.hidden) return false;
+
+      try {
+        isStarting = true;
+        stopFade();
+        bgAudio.volume = 0;
+        await bgAudio.play();
+        userPaused = false;
+        setAudioButton(true);
+        fadeTo(targetVolume);
+        return true;
+      } catch {
+        setAudioButton(false);
+        return false;
+      } finally {
+        isStarting = false;
+      }
+    };
+
+    const pauseAudio = ({ manual = true } = {}) => {
+      if (manual) userPaused = true;
+      if (!isPlaying()) {
+        setAudioButton(false);
+        return;
+      }
+
+      fadeTo(0, () => {
+        bgAudio.pause();
+        setAudioButton(false);
+      });
+    };
+
+    const startOnFirstInteraction = (event) => {
+      if (event.target?.closest?.("#audioToggle")) return;
+      if (!userPaused && !isPlaying()) playAudio();
+    };
+
+    audioToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      if (isPlaying()) {
+        pauseAudio();
+        return;
+      }
+
+      playAudio();
     });
+
+    document.addEventListener("pointerdown", startOnFirstInteraction, { once: true, passive: true });
+    document.addEventListener("keydown", startOnFirstInteraction, { once: true });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        wasPlayingBeforeHidden = isPlaying();
+        if (wasPlayingBeforeHidden) pauseAudio({ manual: false });
+        return;
+      }
+
+      if (wasPlayingBeforeHidden && !userPaused) {
+        playAudio();
+      }
+    });
+
+    window.addEventListener("pagehide", () => {
+      stopFade();
+      bgAudio.pause();
+    });
+
+    bgAudio.addEventListener("error", () => {
+      setAudioButton(false);
+    });
+
+    setAudioButton(false);
+    playAudio();
   };
 
-  window.addEventListener("scroll", setProgress, { passive: true });
-  window.addEventListener("resize", setProgress);
+  window.addEventListener("scroll", requestProgressUpdate, { passive: true });
+  window.addEventListener("resize", requestProgressUpdate);
+  window.addEventListener("load", restoreHashPosition, { once: true });
 
   buildParticles();
-  setupImagePreload();
+  setupAudio();
   setupModal();
   setupNavigation();
   setupObserver();
