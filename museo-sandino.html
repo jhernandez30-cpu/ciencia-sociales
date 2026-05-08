@@ -472,6 +472,33 @@
     🔇 Silencio
   </button>
 
+  <div id="manifestoModal" class="manifesto-modal" aria-hidden="true">
+    <div class="manifesto-modal__overlay" data-manifesto-close></div>
+    <article class="manifesto-modal__content" role="dialog" aria-modal="true" aria-labelledby="manifestoTitle" tabindex="-1">
+      <button class="manifesto-modal__close" id="closeManifestoModal" type="button" aria-label="Cerrar manifiesto" data-manifesto-close>
+        &times;
+      </button>
+      <div class="manifesto-modal__header">
+        <h2 id="manifestoTitle">Manifiesto de San Albino</h2>
+        <p>Por la dignidad y la independencia de Nicaragua</p>
+      </div>
+      <div class="manifesto-modal__image-wrap">
+        <img
+          src="museo-sandino/assets/img/optimized/file_0000000039ec71fb85e1d90952a9c453.jpg"
+          width="1120"
+          height="1400"
+          alt="Manifiesto de San Albino del General Augusto Nicolas Calderon Sandino"
+          class="manifesto-modal__image"
+          loading="lazy"
+          decoding="async">
+      </div>
+      <p class="manifesto-modal__description">
+        Este manifiesto representa una defensa de la dignidad nacional, la soberania y la independencia de Nicaragua.
+      </p>
+      <button class="ghost-button manifesto-modal__bottom-close" type="button" data-manifesto-close>Cerrar</button>
+    </article>
+  </div>
+
   <div class="mural-modal" id="mural-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-backdrop" data-modal-close></div>
     <article class="modal-panel" tabindex="-1">

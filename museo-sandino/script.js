@@ -18,6 +18,8 @@
   const modalCaption = document.getElementById("modal-caption");
   const modalBody = document.getElementById("modal-body");
   const modalExplore = document.getElementById("modal-explore");
+  const manifestoModal = document.getElementById("manifestoModal");
+  const manifestoPanel = manifestoModal?.querySelector(".manifesto-modal__content");
   const audioToggle = document.getElementById("audioToggle");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const smallScreen = window.matchMedia("(max-width: 700px)").matches;
@@ -108,14 +110,6 @@
     };
   };
 
-  const manifestoData = () => ({
-    title: "Manifiesto de San Albino",
-    caption: "Documento vivo de dignidad nacional",
-    body: "Desde San Albino, la palabra escrita se convierte en accion historica: defensa de la independencia, rechazo a la rendicion y compromiso con la soberania de Nicaragua. Esta seccion propone leer el manifiesto como fuente historica y como llamada a la responsabilidad ciudadana.",
-    image: `${assetBase}file_00000000d6e871f895cbcca43b134193.jpg`,
-    next: "#escena-06"
-  });
-
   const nextTargetForActive = () => {
     const next = scrollTargets[Math.min(activeIndex + 1, scrollTargets.length - 1)];
     return next ? `#${next.id}` : "#inicio";
@@ -160,20 +154,6 @@
       });
     });
 
-    document.querySelectorAll("[data-manifest-open]").forEach((trigger) => {
-      trigger.addEventListener("click", (event) => {
-        event.stopPropagation();
-        openModal(manifestoData(), trigger);
-      });
-
-      trigger.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          openModal(manifestoData(), trigger);
-        }
-      });
-    });
-
     document.querySelectorAll("[data-modal-close]").forEach((trigger) => {
       trigger.addEventListener("click", closeModal);
     });
@@ -188,6 +168,66 @@
       if (event.key === "Escape" && modal?.classList.contains("is-open")) {
         closeModal();
       }
+    });
+  };
+
+  const setupManifestoModal = () => {
+    if (!manifestoModal || !manifestoPanel) return;
+
+    let manifestoLastFocus = null;
+
+    const openManifestoModal = (sourceElement) => {
+      closeModal();
+      manifestoLastFocus = sourceElement || document.activeElement;
+      manifestoModal.classList.add("active");
+      manifestoModal.setAttribute("aria-hidden", "false");
+      body.classList.add("modal-open");
+
+      requestAnimationFrame(() => {
+        manifestoPanel.focus();
+      });
+    };
+
+    const closeManifestoModal = () => {
+      if (!manifestoModal.classList.contains("active")) return;
+      manifestoModal.classList.remove("active");
+      manifestoModal.setAttribute("aria-hidden", "true");
+      body.classList.remove("modal-open");
+
+      if (manifestoLastFocus && typeof manifestoLastFocus.focus === "function") {
+        manifestoLastFocus.focus({ preventScroll: true });
+      }
+    };
+
+    const manifestoTriggers = Array.from(document.querySelectorAll("button, [role='button']"))
+      .filter((trigger) => {
+        if (trigger.hasAttribute("data-manifesto-close")) return false;
+        const label = `${trigger.textContent || ""} ${trigger.getAttribute("aria-label") || ""}`.toLowerCase();
+        return trigger.hasAttribute("data-manifest-open") || label.includes("manifiesto");
+      });
+
+    manifestoTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        openManifestoModal(trigger);
+      });
+
+      if (trigger.getAttribute("role") === "button") {
+        trigger.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          openManifestoModal(trigger);
+        });
+      }
+    });
+
+    manifestoModal.querySelectorAll("[data-manifesto-close]").forEach((trigger) => {
+      trigger.addEventListener("click", closeManifestoModal);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeManifestoModal();
     });
   };
 
@@ -380,6 +420,7 @@
 
   buildParticles();
   setupAudio();
+  setupManifestoModal();
   setupModal();
   setupNavigation();
   setupObserver();
