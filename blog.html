@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog · Historias, personas y sociedades</title>
+    <!-- Fuentes Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Hoja de estilos personalizada -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Historias, personas y sociedades</a>
+                <span>tu ventana al mundo</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="index.html#perfil">Perfil</a></li>
+                <li><a href="index.html#experiencia">Experiencia</a></li>
+                <li><a href="index.html#formacion">Formación</a></li>
+                <li><a href="index.html#reconocimientos">Reconocimientos</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECCIÓN BLOG PRINCIPAL -->
+    <section id="blog">
+        <div class="container">
+            <h2 class="section-title">Blog y recursos</h2>
+            <p class="blog-intro">Comparto artículos, reflexiones y materiales para la comunidad educativa. Visita mi blog y canal de YouTube para estar al día.</p>
+            
+            <div class="blog-grid">
+                <!-- Tarjeta principal: Blog de Blogspot -->
+                <div class="blog-card blog-card-featured">
+                    <div class="blog-card-header">
+                        <i class="fas fa-blog" style="color: var(--accent);"></i>
+                        <h3>Semilla Universitaria</h3>
+                    </div>
+                    <p class="blog-meta">Blog en Blogspot · Actualizaciones frecuentes</p>
+                    <p class="blog-excerpt">Análisis de coyuntura, materiales didácticos, reflexiones sobre historia, filosofía y sociedad. ¡Suscríbete y participa!</p>
+                    <a href="https://semillauniversitaria.blogspot.com/" class="blog-link" target="_blank">Visitar blog <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Tarjeta: Canal de YouTube -->
+                <div class="blog-card blog-card-youtube">
+                    <div class="blog-card-header">
+                        <i class="fab fa-youtube" style="color: #c4302b;"></i>
+                        <h3>Canal de YouTube</h3>
+                    </div>
+                    <p class="blog-meta">Ricardo José Hernández Sandoval</p>
+                    <p class="blog-excerpt">Clases grabadas, conferencias, análisis de temas sociales y filosóficos. Ideal para estudiantes y docentes.</p>
+                    <a href="https://www.youtube.com/@RicardoJoseHernandezSandoval" class="blog-link" target="_blank">Ir al canal <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Podemos añadir más tarjetas simulando entradas recientes (opcional) -->
+                <div class="blog-card">
+                    <div class="blog-card-header">
+                        <i class="fas fa-newspaper"></i>
+                        <h3>Artículo: Enseñar historia en el siglo XXI</h3>
+                    </div>
+                    <p class="blog-meta">Publicado en Semilla Universitaria · 10 mar 2025</p>
+                    <p class="blog-excerpt">Nuevas estrategias para conectar a los jóvenes con el pasado. Incluye ejemplos prácticos para el aula.</p>
+                    <a href="https://semillauniversitaria.blogspot.com/" class="blog-link" target="_blank">Leer en blog <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-card-header">
+                        <i class="fas fa-video"></i>
+                        <h3>Video: Filosofía y vida cotidiana</h3>
+                    </div>
+                    <p class="blog-meta">YouTube · 5 mar 2025</p>
+                    <p class="blog-excerpt">¿Cómo aplicar la filosofía en nuestra vida diaria? Una charla amena y educativa.</p>
+                    <a href="https://www.youtube.com/@RicardoJoseHernandezSandoval" class="blog-link" target="_blank">Ver video <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <p class="blog-note">¿Quieres proponer un tema o colaborar? <a href="mailto:docentebautista@gmail.com">Escríbeme</a>.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© 2025 · Prof. Ricardo José Hernández Sandoval · <a href="index.html">Historias, personas y sociedades: tu ventana al mundo</a></p>
+            <p>Contacto: <a href="mailto:docentebautista@gmail.com">docentebautista@gmail.com</a> | <a href="https://www.youtube.com/@RicardoJoseHernandezSandoval" target="_blank">YouTube</a> | <a href="blog.html">Blog</a></p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Diseño académico con vocación social</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
