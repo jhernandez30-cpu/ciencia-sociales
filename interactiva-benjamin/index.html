@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Página conmemorativa e interactiva sobre Benjamín Zeledón, héroe de la soberanía nacional de Nicaragua.">
+  <title>Benjamín Zeledón | Héroe de la Soberanía Nacional</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Lora:ital,wght@0,500;0,600;0,700;1,600&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #031528;
+      --bg-deep: #010814;
+      --panel: rgba(6, 28, 49, 0.78);
+      --panel-strong: rgba(5, 23, 42, 0.92);
+      --gold: #d6a93b;
+      --gold-soft: #f3d276;
+      --blue: #005eb8;
+      --white: #f7f8fb;
+      --muted: #c4ccd8;
+      --line: rgba(214, 169, 59, 0.45);
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      --radius: 12px;
+      --max: 1536px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      scroll-behavior: smooth;
+      background: var(--bg-deep);
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--white);
+      font-family: "Lora", Georgia, serif;
+      line-height: 1.35;
+      overflow-x: hidden;
+      background: var(--bg-deep);
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .stage {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(1, 8, 20, 0.74) 0%, rgba(3, 21, 40, 0.5) 42%, rgba(1, 8, 20, 0.66) 100%),
+        linear-gradient(180deg, rgba(1, 8, 20, 0.34), rgba(1, 8, 20, 0.88)),
+        url("assets/Batalla barranca.png") center / cover no-repeat;
+    }
+
+    .stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 22% 25%, rgba(0, 94, 184, 0.22), transparent 30%),
+        radial-gradient(circle at 58% 18%, rgba(214, 169, 59, 0.16), transparent 25%),
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 90px 90px;
+      opacity: 0.75;
+    }
+
+    /* Capa derecha: destaca al soldado con la bandera del fondo de batalla. */
+    .flagman-layer {
+      position: absolute;
+      z-index: 1;
+      top: 74px;
+      right: -1.5vw;
+      width: min(44vw, 690px);
+      height: 448px;
+      pointer-events: none;
+      background: url("assets/Batalla barranca.png") center center / auto 100% no-repeat;
+      filter: saturate(1.08) contrast(1.05);
+      opacity: 0.96;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 24%, #000 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 24%, #000 100%);
+    }
+
+    .flagman-layer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(1,8,20,0.42), transparent 35%, rgba(1,8,20,0.08));
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 20;
+      height: 74px;
+      display: grid;
+      grid-template-columns: 450px 1fr;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 0 48px;
+      background: linear-gradient(180deg, rgba(1, 8, 20, 0.72), rgba(1, 8, 20, 0.12));
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 0;
+    }
+
+    .crest {
+      position: relative;
+      width: 82px;
+      height: 58px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-family: "Cinzel", serif;
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .crest::before,
+    .crest::after {
+      content: "❧";
+      position: absolute;
+      top: 7px;
+      color: var(--gold);
+      font-size: 2rem;
+    }
+
+    .crest::before {
+      left: 0;
+      transform: rotate(-30deg);
+    }
+
+    .crest::after {
+      right: 0;
+      transform: scaleX(-1) rotate(-30deg);
+    }
+
+    .crest-mark {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, #0a63bd 0 32%, #f8fbff 32% 68%, #0a63bd 68% 100%);
+      box-shadow: inset 0 0 0 3px rgba(1,8,20,0.5), 0 0 14px rgba(214,169,59,0.18);
+    }
+
+    .seal-triangle {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 18px;
+      height: 16px;
+      transform: translate(-50%, -43%);
+      -webkit-clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      background: linear-gradient(180deg, #f7d66f, #0d8ec7 48%, #4f8a35 49%);
+      border: 1px solid rgba(2,8,16,0.45);
+    }
+
+    .brand-rule {
+      width: 1px;
+      height: 42px;
+      background: linear-gradient(transparent, var(--gold), transparent);
+    }
+
+    .brand-text strong {
+      display: block;
+      color: var(--gold-soft);
+      font-family: "Cinzel", serif;
+      font-size: 1.38rem;
+      line-height: 1;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .brand-text span {
+      display: block;
+      margin-top: 0.28rem;
+      color: rgba(255,255,255,0.86);
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.35rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav a {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.52rem;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 0.55rem 0.86rem;
+      color: var(--white);
+      font-size: 0.94rem;
+      transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
+    }
+
+    .nav a.active,
+    .nav a:hover {
+      border-color: var(--gold);
+      color: var(--gold-soft);
+      background: rgba(1, 8, 20, 0.3);
+    }
+
+    .nav svg {
+      width: 21px;
+      height: 21px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .hero-zone {
+      position: relative;
+      z-index: 2;
+      min-height: 450px;
+      padding: 0 28px;
+    }
+
+    .hero-figure {
+      position: absolute;
+      left: 0;
+      top: -14px;
+      width: 41.5vw;
+      max-width: 638px;
+      min-width: 440px;
+      height: 515px;
+      object-fit: cover;
+      object-position: 48% center;
+      filter: drop-shadow(0 28px 42px rgba(0,0,0,0.55));
+      -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent 100%);
+      mask-image: linear-gradient(90deg, #000 70%, transparent 100%);
+    }
+
+    .title-block {
+      position: absolute;
+      left: 34.85%;
+      top: 32px;
+      width: 30%;
+      min-width: 390px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--gold-soft);
+      font-family: "Cinzel", serif;
+      font-size: clamp(3.45rem, 5.05vw, 5.25rem);
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      text-shadow: 0 4px 0 rgba(0,0,0,0.22), 0 16px 30px rgba(0,0,0,0.36);
+    }
+
+    .subtitle {
+      display: grid;
+      grid-template-columns: 54px auto 54px;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 1.1rem 0 1rem;
+      color: var(--white);
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.12rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      line-height: 1.35;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .subtitle::before,
+    .subtitle::after {
+      content: "";
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+
+    .subtitle::after {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .lead {
+      max-width: 450px;
+      margin: 0;
+      color: rgba(255,255,255,0.92);
+      font-size: 1.05rem;
+      line-height: 1.45;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      min-width: 205px;
+      min-height: 47px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      border-radius: 7px;
+      padding: 0.75rem 0.86rem;
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      fill: none;
+    }
+
+    .btn-gold {
+      border: 1px solid rgba(255,255,255,0.18);
+      background: linear-gradient(135deg, #b9821f, var(--gold-soft));
+      color: var(--white);
+      box-shadow: 0 10px 22px rgba(214,169,59,0.28);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--gold);
+      background: rgba(3, 21, 40, 0.72);
+      color: var(--white);
+    }
+
+    .facts-panel {
+      position: absolute;
+      top: 58px;
+      right: 19%;
+      width: 240px;
+      border: 1px solid rgba(214,169,59,0.68);
+      border-radius: 12px;
+      background: rgba(7, 29, 51, 0.72);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .fact {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 0.78rem;
+      padding: 1rem 0.9rem;
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .fact:last-child {
+      border-bottom: 0;
+    }
+
+    .fact svg {
+      width: 34px;
+      height: 34px;
+      stroke: var(--gold-soft);
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .fact strong {
+      display: block;
+      margin-bottom: 0.1rem;
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .fact span {
+      display: block;
+      color: rgba(255,255,255,0.88);
+      font-size: 0.82rem;
+      line-height: 1.26;
+    }
+
+    .features {
+      position: relative;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 0 28px;
+      margin-top: 2px;
+    }
+
+    .feature {
+      position: relative;
+      min-height: 152px;
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 0.85rem;
+      overflow: hidden;
+      border: 1px solid rgba(214,169,59,0.55);
+      border-radius: 10px;
+      background: rgba(8, 32, 55, 0.7);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(8px);
+      padding: 1rem;
+    }
+
+    .feature::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(4,18,34,0.94), rgba(4,18,34,0.72), transparent), var(--card-bg);
+      background-position: center;
+      background-size: cover;
+      opacity: 0.95;
+      z-index: -1;
+    }
+
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      color: var(--gold-soft);
+      background: rgba(4,18,34,0.5);
+    }
+
+    .feature-icon svg {
+      width: 37px;
+      height: 37px;
+      stroke: currentColor;
+      stroke-width: 1.55;
+      fill: none;
+    }
+
+    .feature h2 {
+      margin: 0 0 0.3rem;
+      color: var(--gold-soft);
+      font-family: "Cinzel", serif;
+      font-size: 1rem;
+      line-height: 1.08;
+      text-transform: uppercase;
+    }
+
+    .feature p {
+      margin: 0 0 0.62rem;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.79rem;
+      line-height: 1.28;
+    }
+
+    .mini-btn {
+      min-width: 92px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 5px;
+      background: linear-gradient(135deg, #0a4d88, #082a4e);
+      color: var(--white);
+      padding: 0.42rem 0.85rem;
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.7rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .mini-btn.green {
+      background: linear-gradient(135deg, #3f861d, #15520f);
+    }
+
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      padding: clamp(1rem, 3vw, 2.2rem);
+      background:
+        radial-gradient(circle at 50% 18%, rgba(214,169,59,0.22), transparent 34%),
+        rgba(1, 8, 20, 0.86);
+      backdrop-filter: blur(12px);
+      animation: modalFade 180ms ease both;
+    }
+
+    .image-modal[hidden] {
+      display: none;
+    }
+
+    .modal-card {
+      position: relative;
+      width: min(96vw, 1280px);
+      border: 1px solid rgba(214,169,59,0.68);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(3, 21, 40, 0.95);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.62), 0 0 42px rgba(214,169,59,0.18);
+      animation: modalRise 220ms ease both;
+    }
+
+    .modal-card img {
+      width: 100%;
+      max-height: 86vh;
+      object-fit: contain;
+      background: #020814;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      z-index: 2;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(214,169,59,0.72);
+      border-radius: 50%;
+      background: rgba(1,8,20,0.82);
+      color: var(--gold-soft);
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .modal-close:hover {
+      transform: scale(1.06);
+      background: rgba(214,169,59,0.18);
+    }
+
+    .modal-close svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    @keyframes modalFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalRise {
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .timeline-area {
+      position: relative;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: 1fr 286px;
+      gap: 18px;
+      padding: 8px 28px 0;
+    }
+
+    .timeline-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 0 0 4px;
+      color: var(--gold-soft);
+      font-family: "Cinzel", serif;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+    }
+
+    .timeline-title::before,
+    .timeline-title::after {
+      content: "";
+      width: 55px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .timeline-track {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      min-height: 172px;
+      padding-top: 18px;
+    }
+
+    .timeline-track::before {
+      content: "";
+      position: absolute;
+      top: 47px;
+      left: 2.5%;
+      right: 2.5%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold), transparent);
+    }
+
+    .event {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      align-content: start;
+      padding: 0 0.45rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 550ms ease, transform 550ms ease;
+    }
+
+    .event.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .event::after {
+      content: "";
+      position: absolute;
+      top: 45px;
+      bottom: 0;
+      width: 1px;
+      background: rgba(255,255,255,0.17);
+    }
+
+    .event-icon {
+      position: relative;
+      z-index: 2;
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, var(--gold-soft), #9b7425);
+      color: var(--white);
+      box-shadow: 0 0 0 4px rgba(214,169,59,0.18);
+    }
+
+    .event-icon svg {
+      width: 31px;
+      height: 31px;
+      stroke: currentColor;
+      stroke-width: 1.55;
+      fill: none;
+    }
+
+    .event strong {
+      margin-top: 0.62rem;
+      color: var(--gold-soft);
+      font-size: 1rem;
+    }
+
+    .event p {
+      margin: 0.28rem 0 0;
+      color: rgba(255,255,255,0.88);
+      font-size: 0.78rem;
+      line-height: 1.25;
+    }
+
+    .curiosity {
+      align-self: start;
+      overflow: hidden;
+      border: 1px solid rgba(214,169,59,0.6);
+      border-radius: 10px;
+      background: rgba(7, 29, 51, 0.74);
+      box-shadow: var(--shadow);
+    }
+
+    .curiosity-top {
+      padding: 0.92rem 1.12rem;
+    }
+
+    .curiosity h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0 0 0.4rem;
+      color: var(--gold-soft);
+      font-family: "Cinzel", serif;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+    }
+
+    .curiosity p {
+      margin: 0;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.86rem;
+      line-height: 1.25;
+    }
+
+    .curiosity-quote {
+      border-top: 1px solid rgba(214,169,59,0.45);
+      padding: 0.82rem 1.12rem;
+      color: var(--gold-soft);
+      font-style: italic;
+      line-height: 1.25;
+    }
+
+    .curiosity-quote span {
+      display: block;
+      color: var(--gold-soft);
+      font-size: 2rem;
+      line-height: 0.5;
+    }
+
+    .footer {
+      position: relative;
+      z-index: 4;
+      min-height: 64px;
+      display: grid;
+      grid-template-columns: 330px 1fr 330px;
+      align-items: center;
+      gap: 1rem;
+      border-top: 1px solid rgba(214,169,59,0.35);
+      margin-top: 4px;
+      padding: 0.58rem 38px;
+      background: rgba(1,8,20,0.55);
+    }
+
+    .footer-left,
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: rgba(255,255,255,0.84);
+      font-size: 0.78rem;
+    }
+
+    .footer-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--white);
+      font-size: 1.12rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .leaf {
+      color: var(--gold);
+      font-size: 1.8rem;
+    }
+
+    .flag {
+      width: 38px;
+      height: 24px;
+      border-radius: 2px;
+      background: linear-gradient(#0b69bd 0 33%, #fff 33% 66%, #0b69bd 66%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.18);
+    }
+
+    .round-user {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+    }
+
+    .round-user svg {
+      width: 23px;
+      height: 23px;
+      stroke: currentColor;
+      stroke-width: 1.4;
+      fill: none;
+    }
+
+    svg {
+      vector-effect: non-scaling-stroke;
+    }
+
+    @media (max-width: 1180px) {
+      .topbar {
+        grid-template-columns: 1fr;
+        height: auto;
+        padding: 0.7rem 1rem;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .flagman-layer {
+        display: none;
+      }
+
+      .hero-zone {
+        display: grid;
+        gap: 1.5rem;
+        min-height: auto;
+        padding-top: 1rem;
+      }
+
+      .hero-figure,
+      .title-block,
+      .facts-panel {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+      }
+
+      .hero-figure {
+        height: 420px;
+        object-fit: cover;
+        -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent);
+        mask-image: linear-gradient(to bottom, #000 80%, transparent);
+      }
+
+      .title-block {
+        display: grid;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .lead {
+        max-width: 760px;
+      }
+
+      .facts-panel {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .fact {
+        border-bottom: 0;
+        border-right: 1px solid rgba(255,255,255,0.14);
+      }
+
+      .features,
+      .timeline-area,
+      .footer {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .curiosity,
+      .footer-center {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .stage {
+        overflow: visible;
+      }
+
+      .topbar {
+        align-items: start;
+      }
+
+      .brand {
+        gap: 0.7rem;
+      }
+
+      .brand-text strong {
+        font-size: 1rem;
+      }
+
+      .brand-text span {
+        font-size: 0.58rem;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero-figure {
+        height: 330px;
+      }
+
+      h1 {
+        font-size: clamp(2.65rem, 12vw, 3.25rem);
+        line-height: 1;
+      }
+
+      .subtitle {
+        grid-template-columns: 1fr;
+        font-size: 0.92rem;
+      }
+
+      .subtitle::before,
+      .subtitle::after {
+        display: none;
+      }
+
+      .hero-actions,
+      .facts-panel,
+      .features,
+      .timeline-area,
+      .footer {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        display: grid;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .features {
+        padding-inline: 1rem;
+      }
+
+      .timeline-track {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .timeline-track::before {
+        top: 0;
+        bottom: 0;
+        left: 29px;
+        width: 3px;
+        height: auto;
+      }
+
+      .event {
+        grid-template-columns: 58px 1fr;
+        justify-items: start;
+        align-items: start;
+        text-align: left;
+      }
+
+      .event::after {
+        display: none;
+      }
+
+      .event strong,
+      .event p {
+        grid-column: 2;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <header class="topbar">
+      <a class="brand" href="../index.html" aria-label="Volver al sitio principal">
+        <span class="crest" aria-hidden="true"><span class="crest-mark"><span class="seal-triangle"></span></span></span>
+        <span class="brand-rule" aria-hidden="true"></span>
+        <span class="brand-text">
+          <strong>Benjamín Zeledón</strong>
+          <span>Héroe de la soberanía nacional</span>
+        </span>
+      </a>
+
+      <nav aria-label="Navegación de secciones">
+        <ul class="nav">
+          <li><a class="active" href="#inicio"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h5v-5h4v5h5v-9.5"/></svg>Inicio</a></li>
+          <li><a href="#biografia"><svg viewBox="0 0 24 24"><path d="M6 3h10l2 2v16H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Biografía</a></li>
+          <li><a href="#linea-tiempo"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 3"/></svg>Línea de tiempo</a></li>
+          <li><a href="#lugares"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 0 0-14 0c0 5.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Lugares</a></li>
+          <li><a href="#legado"><svg viewBox="0 0 24 24"><path d="M4 6h6a4 4 0 0 1 4 4v10a4 4 0 0 0-4-4H4z"/><path d="M20 6h-6a4 4 0 0 0-4 4v10a4 4 0 0 1 4-4h6z"/></svg>Legado</a></li>
+          <li><a href="#aprende"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>Aprende</a></li>
+          <li><a href="#glosario"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Glosario</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="flagman-layer" aria-hidden="true"></div>
+
+    <main id="inicio">
+      <section class="hero-zone" aria-label="Portada de Benjamín Zeledón">
+        <!-- Imagen principal izquierda: assets/Benjamin Zeledon.png -->
+        <img class="hero-figure" src="assets/Benjamin Zeledon.png" alt="Benjamín Zeledón frente a la bandera de Nicaragua.">
+
+        <div class="title-block">
+          <h1>Benjamín<br>Zeledón</h1>
+          <p class="subtitle">Héroe de la soberanía nacional de Nicaragua</p>
+          <p class="lead">Abogado, patriota y líder de la resistencia nicaragüense que defendió con valentía la soberanía nacional frente a la intervención extranjera en 1912.</p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="#biografia"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 5.5V21"/></svg>Explorar historia</a>
+            <button class="btn btn-outline" type="button" id="timelineButton"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 3"/></svg>Ver línea de tiempo</button>
+          </div>
+        </div>
+
+        <aside class="facts-panel" aria-label="Datos rápidos">
+          <div class="fact">
+            <svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 0 0-14 0c0 5.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <div><strong>Nacimiento</strong><span>4 de octubre de 1879<br>La Concordia</span></div>
+          </div>
+          <div class="fact">
+            <svg viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6z"/></svg>
+            <div><strong>Causa</strong><span>Defensa de la soberanía nacional</span></div>
+          </div>
+          <div class="fact">
+            <svg viewBox="0 0 24 24"><path d="M4 20 20 4M14 4l6 6M4 10l6-6M8 16l-4 4M16 8l4-4"/></svg>
+            <div><strong>Lucha</strong><span>Resistencia contra la intervención extranjera</span></div>
+          </div>
+          <div class="fact">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16v14H4z"/><path d="M8 6V3h8v3M8 14l3-3 2 2 3-4"/></svg>
+            <div><strong>Muerte</strong><span>4 de octubre de 1912<br>Cerca de Catarina, Masaya</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="features" id="biografia" aria-label="Tarjetas educativas">
+        <article class="feature" style="--card-bg:url('assets/ChatGPT Image 9 may 2026, 22_47_15.png')">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 5.5V21"/></svg></span>
+          <div><h2>Biografía</h2><p>Conoce su vida, formación académica y participación política.</p><button class="mini-btn" type="button" data-modal-target="bioImageModal" aria-haspopup="dialog">Ver más</button></div>
+        </article>
+        <article class="feature" style="--card-bg:url('assets/ChatGPT Image 9 may 2026, 22_50_02.png')">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 20 20 4M14 4l6 6M4 10l6-6M8 16l-4 4M16 8l4-4"/></svg></span>
+          <div><h2>Defensa de la soberanía</h2><p>Su liderazgo en la resistencia armada en El Coyotepe y La Barranca.</p><button class="mini-btn" type="button" data-modal-target="defensaImageModal" aria-haspopup="dialog">Ver más</button></div>
+        </article>
+        <article class="feature" id="legado" style="--card-bg:url('assets/ChatGPT Image 9 may 2026, 22_54_10.png')">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M8 9h8M9 5h6"/></svg></span>
+          <div><h2>Legado</h2><p>Su ejemplo inspiró a Augusto C. Sandino y a generaciones posteriores.</p><button class="mini-btn" type="button" data-modal-target="legadoImageModal" aria-haspopup="dialog">Ver más</button></div>
+        </article>
+        <article class="feature" id="aprende" style="--card-bg:url('assets/ChatGPT Image 9 may 2026, 22_58_22.png')">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="m3 8 9-4 9 4-9 4z"/><path d="M7 10v5c0 1.6 2.2 3 5 3s5-1.4 5-3v-5"/></svg></span>
+          <div><h2>Aprende jugando</h2><p>Pon a prueba tus conocimientos con juegos, cuestionarios y actividades interactivas.</p><a class="mini-btn green" href="aprender.html" aria-label="Ir a los juegos interactivos sobre Benjamín Zeledón">Jugar ahora</a></div>
+        </article>
+      </section>
+
+      <section class="timeline-area" id="linea-tiempo">
+        <div>
+          <h2 class="timeline-title">Línea de tiempo</h2>
+          <div class="timeline-track">
+            <article class="event"><span class="event-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c2-4 14-4 16 0"/></svg></span><strong>1879</strong><p>Nace en La Concordia el 4 de octubre.</p></article>
+            <article class="event"><span class="event-icon"><svg viewBox="0 0 24 24"><path d="m3 8 9-4 9 4-9 4z"/><path d="M7 10v5c0 1.6 2.2 3 5 3s5-1.4 5-3v-5"/></svg></span><strong>Estudios</strong><p>Realiza estudios y se gradúa de abogado.</p></article>
+            <article class="event"><span class="event-icon"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V9l6-4 6 4v11M9 20v-6h6v6"/></svg></span><strong>Participación política</strong><p>Forma parte del movimiento liberal y ocupa cargos públicos.</p></article>
+            <article class="event"><span class="event-icon"><svg viewBox="0 0 24 24"><path d="M4 20h16M8 20V6l8 3-8 3"/></svg></span><strong>1912</strong><p>Intervención estadounidense. Tropas desembarcan en Nicaragua.</p></article>
+            <article class="event"><span class="event-icon"><svg viewBox="0 0 24 24"><path d="m3 18 7-11 4 7 3-4 4 8z"/></svg></span><strong>1912</strong><p>Defensa de El Coyotepe. Organiza la resistencia.</p></article>
+            <article class="event"><span class="event-icon"><svg viewBox="0 0 24 24"><path d="M5 4v16M5 5h11l-2 4 2 4H5"/></svg></span><strong>1912</strong><p>Defensa de La Barranca frente a fuerzas extranjeras.</p></article>
+            <article class="event"><span class="event-icon"><svg viewBox="0 0 24 24"><path d="M12 4v16M7 9l10 10M17 9 7 19"/></svg></span><strong>4 oct. 1912</strong><p>Muerte de Benjamín Zeledón. Es capturado cerca de Catarina, Masaya.</p></article>
+            <article class="event"><span class="event-icon"><svg viewBox="0 0 24 24"><path d="M12 3c-3 3-5 6-5 10a5 5 0 0 0 10 0c0-4-2-7-5-10z"/><path d="M9 21h6"/></svg></span><strong>Legado</strong><p>Su ejemplo inspira a Augusto C. Sandino y al pueblo nicaragüense.</p></article>
+          </div>
+        </div>
+
+        <aside class="curiosity" id="glosario">
+          <div class="curiosity-top">
+            <h2>💡 ¿Sabías qué?</h2>
+            <p>Se dice que Augusto C. Sandino presenció el paso del cuerpo de Benjamín Zeledón y este hecho marcó su compromiso con la lucha por la soberanía nacional.</p>
+          </div>
+          <div class="curiosity-quote">
+            <span>“</span>
+            La patria no se vende, la patria se defiende con honor y valentía.<br>
+            — Benjamín Zeledón
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer" id="lugares">
+      <div class="footer-left"><span class="round-user"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c2-5 14-5 16 0"/></svg></span><span>Página educativa e interactiva<br>sobre Benjamín Zeledón.</span></div>
+      <div class="footer-center"><span class="leaf">❧</span><span>“Su valentía vive en cada nicaragüense que ama y defiende su patria.”</span><span class="leaf">❧</span></div>
+      <div class="footer-right"><span class="flag"></span><span>Orgullosamente nicaragüenses<br>Historia · Identidad · Soberanía</span></div>
+    </footer>
+  </div>
+
+  <div class="image-modal" id="bioImageModal" role="dialog" aria-modal="true" aria-label="Imagen ampliada de la biografía de Benjamín Zeledón" hidden>
+    <div class="modal-card">
+      <button class="modal-close" type="button" aria-label="Cerrar imagen">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <img src="assets/biografia-benjamin-zeledon.png" alt="Infografía conmemorativa de la vida, formación académica, participación política y legado de Benjamín Zeledón">
+    </div>
+  </div>
+
+  <div class="image-modal" id="defensaImageModal" role="dialog" aria-modal="true" aria-label="Imagen ampliada sobre la defensa de la soberanía de Benjamín Zeledón" hidden>
+    <div class="modal-card">
+      <button class="modal-close" type="button" aria-label="Cerrar imagen">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <img src="assets/defensa-soberania-benjamin-zeledon.png" alt="Infografía sobre la defensa de la soberanía, El Coyotepe, La Barranca y el liderazgo de Benjamín Zeledón">
+    </div>
+  </div>
+
+  <div class="image-modal" id="legadoImageModal" role="dialog" aria-modal="true" aria-label="Imagen ampliada sobre el legado de Benjamín Zeledón" hidden>
+    <div class="modal-card">
+      <button class="modal-close" type="button" aria-label="Cerrar imagen">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <img src="assets/legado-benjamin-zeledon.png" alt="Infografía sobre el legado de Benjamín Zeledón, su inspiración en Augusto C. Sandino y su valor para la soberanía nacional">
+    </div>
+  </div>
+
+  <script>
+    const timelineButton = document.getElementById("timelineButton");
+    const timelineSection = document.getElementById("linea-tiempo");
+
+    timelineButton.addEventListener("click", () => {
+      timelineSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    let lastFocusedElement = null;
+
+    function openImageModal(modal) {
+      lastFocusedElement = document.activeElement;
+      modal.hidden = false;
+      document.body.classList.add("modal-open");
+      modal.querySelector(".modal-close").focus();
+    }
+
+    function closeImageModal(modal) {
+      modal.hidden = true;
+      document.body.classList.remove("modal-open");
+      if (lastFocusedElement) {
+        lastFocusedElement.focus();
+      }
+    }
+
+    document.querySelectorAll(".mini-btn").forEach((button) => {
+      if (button.matches("a[href]")) {
+        return;
+      }
+
+      button.addEventListener("click", () => {
+        const modalId = button.dataset.modalTarget;
+        if (modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            openImageModal(modal);
+          }
+          return;
+        }
+
+        const title = button.closest(".feature").querySelector("h2").textContent.trim();
+        alert(`${title}: módulo educativo listo para ampliar.`);
+      });
+    });
+
+    document.querySelectorAll(".image-modal").forEach((modal) => {
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          closeImageModal(modal);
+        }
+      });
+
+      modal.querySelector(".modal-close").addEventListener("click", () => {
+        closeImageModal(modal);
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        document.querySelectorAll(".image-modal:not([hidden])").forEach(closeImageModal);
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: "0px 0px -40px 0px" });
+
+    document.querySelectorAll(".event").forEach((eventCard) => observer.observe(eventCard));
+  </script>
+</body>
+</html>

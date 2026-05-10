@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sitio academico del Prof. Ricardo Jose Hernandez Sandoval sobre Ciencias Sociales, Filosofia, Historia, ciudadania y recursos educativos.">
     <title>Historias, personas y sociedades · Prof. Ricardo Hernández</title>
     <!-- Fuentes Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Open+Sans:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Hoja de estilos personalizada -->
@@ -15,7 +16,7 @@
 </head>
 <body>
     <!-- BARRA DE NAVEGACIÓN -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Navegacion principal">
         <div class="container">
             <div class="logo">
                 <a href="index.html">Historias, personas y sociedades</a>
@@ -24,13 +25,11 @@
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html#inicio">Inicio</a></li>
                 <li><a href="index.html#perfil">Perfil</a></li>
-                <li><a href="index.html#experiencia">Experiencia</a></li>
-                <li><a href="index.html#formacion">Formación</a></li>
-                <li><a href="index.html#reconocimientos">Reconocimientos</a></li>
                 <li><a href="museo-sandino.html">Museo</a></li>
+                <li><a href="interactiva-benjamin/index.html" aria-label="Abrir sitio interactivo de Benjamín Zeledón">Zeledón</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
+            <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-controls="nav-menu" aria-expanded="false" aria-label="Abrir menu de navegacion">
                 <span></span><span></span><span></span>
             </div>
         </div>
@@ -46,7 +45,7 @@
                 <div class="hero-contact">
                     <p><i class="fas fa-envelope"></i> docentebautista@gmail.com</p>
                     <p><i class="fas fa-phone-alt"></i> +505 86161583</p>
-                    <a href="https://www.youtube.com/@RicardoJoseHernandezSandoval" target="_blank" class="youtube-link"><i class="fab fa-youtube"></i> Ricardo José Hernández Sandoval</a>
+                    <a href="https://www.youtube.com/@RicardoJoseHernandezSandoval" target="_blank" rel="noopener" class="youtube-link" aria-label="Abrir canal de YouTube de Ricardo Jose Hernandez Sandoval"><i class="fab fa-youtube"></i> Ricardo José Hernández Sandoval</a>
                 </div>
             </div>
             <div class="hero-avatar">
@@ -188,7 +187,7 @@
     <footer>
         <div class="container">
             <p>© 2025 · Prof. Ricardo José Hernández Sandoval · <a href="index.html">Historias, personas y sociedades: tu ventana al mundo</a></p>
-            <p>Contacto: <a href="mailto:docentebautista@gmail.com">docentebautista@gmail.com</a> | <a href="https://www.youtube.com/@RicardoJoseHernandezSandoval" target="_blank">YouTube</a> | <a href="blog.html">Blog</a></p>
+            <p>Contacto: <a href="mailto:docentebautista@gmail.com">docentebautista@gmail.com</a> | <a href="https://www.youtube.com/@RicardoJoseHernandezSandoval" target="_blank" rel="noopener">YouTube</a> | <a href="blog.html">Blog</a></p>
             <p style="margin-top: 0.5rem; font-size: 0.9rem;">Diseño académico con vocación social</p>
         </div>
     </footer>

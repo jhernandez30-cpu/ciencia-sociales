@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Juegos interactivos para aprender sobre Benjamín Zeledón, héroe nacional de Nicaragua, soberanía, El Coyotepe, La Barranca y su legado.">
+  <title>Aprende jugando sobre Benjamín Zeledón</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Lora:wght@500;600;700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="juegos-benjamin.css">
+  <script src="juegos-benjamin.js" defer></script>
+</head>
+<body>
+  <div class="game-page">
+    <header class="game-header">
+      <a class="back-link" href="index.html" aria-label="Volver a la página de Benjamín Zeledón">
+        <span aria-hidden="true">‹</span>
+        Volver
+      </a>
+
+      <div class="header-title">
+        <p>Mini plataforma educativa</p>
+        <h1>Aprende jugando sobre Benjamín Zeledón</h1>
+      </div>
+
+      <section class="score-board" aria-label="Puntaje de juegos">
+        <div class="score-pill">
+          <span>Puntaje</span>
+          <strong id="scoreTotal">0</strong>
+        </div>
+        <div class="score-pill">
+          <span>Mejor</span>
+          <strong id="bestScore">0</strong>
+        </div>
+        <button class="reset-progress" id="resetProgress" type="button">Reiniciar progreso</button>
+      </section>
+    </header>
+
+    <main class="game-main">
+      <section class="intro-panel" id="gameMenu">
+        <div class="intro-copy">
+          <span class="eyebrow">Historia · Identidad · Soberanía</span>
+          <h2>Elige un reto, responde y gana insignias</h2>
+          <p>Juega para repasar la vida, formación, lucha y legado de Benjamín Zeledón de forma rápida, visual y participativa.</p>
+        </div>
+
+        <div class="games-grid" aria-label="Lista de juegos disponibles">
+          <article class="game-card" data-game="quiz">
+            <span class="game-icon" aria-hidden="true">?</span>
+            <h3>Reto de la Soberanía</h3>
+            <p>Quiz por niveles con preguntas sobre su vida y lucha.</p>
+            <span class="difficulty">Medio</span>
+            <button type="button">Jugar</button>
+          </article>
+
+          <article class="game-card" data-game="trueFalse">
+            <span class="game-icon" aria-hidden="true">V/F</span>
+            <h3>¿Verdadero o Falso?</h3>
+            <p>Decide si cada afirmación histórica es correcta.</p>
+            <span class="difficulty easy">Fácil</span>
+            <button type="button">Jugar</button>
+          </article>
+
+          <article class="game-card" data-game="memory">
+            <span class="game-icon" aria-hidden="true">M</span>
+            <h3>Memoria Histórica</h3>
+            <p>Encuentra parejas de conceptos y significados.</p>
+            <span class="difficulty">Medio</span>
+            <button type="button">Jugar</button>
+          </article>
+
+          <article class="game-card" data-game="timeline">
+            <span class="game-icon" aria-hidden="true">1-9</span>
+            <h3>Ordena la Historia</h3>
+            <p>Coloca los eventos en la secuencia correcta.</p>
+            <span class="difficulty hard">Reto</span>
+            <button type="button">Jugar</button>
+          </article>
+
+          <article class="game-card" data-game="complete">
+            <span class="game-icon" aria-hidden="true">...</span>
+            <h3>Completa la Frase</h3>
+            <p>Elige la palabra correcta para completar cada idea.</p>
+            <span class="difficulty easy">Fácil</span>
+            <button type="button">Jugar</button>
+          </article>
+
+          <article class="game-card" data-game="mission">
+            <span class="game-icon" aria-hidden="true">★</span>
+            <h3>Defensor de la Patria</h3>
+            <p>Supera misiones y desbloquea insignias.</p>
+            <span class="difficulty hard">Reto</span>
+            <button type="button">Jugar</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="game-stage hidden" id="gameStage" aria-live="polite">
+        <div class="stage-toolbar">
+          <button class="ghost-btn" id="backToGames" type="button">Volver a juegos</button>
+          <div>
+            <span class="stage-kicker">Reto activo</span>
+            <h2 id="activeGameTitle">Juego</h2>
+          </div>
+        </div>
+        <div class="game-content" id="gameContent"></div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
